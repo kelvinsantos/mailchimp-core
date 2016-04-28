@@ -1,0 +1,10 @@
+{
+	"name": "mc-core",
+	"version": "0.0.1",
+	"private": true,
+	"dependencies": {
+		"request": "^2.58.0",
+		"restify": "*",
+		"restify-errors": "*"
+	}
+}
