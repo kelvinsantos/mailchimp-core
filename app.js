@@ -46,7 +46,7 @@ server.use(restify.gzipResponse());
 //     next();
 // });
 
-server.get('/', function (req, res, next) {
+server.get('/healthcheck', function (req, res, next) {
     res.send('mailchimp api is running...');
 });
 
