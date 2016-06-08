@@ -5,8 +5,6 @@ var restify = require('restify'),
 	PUT_campaignContent = require('./routes/PUT_campaignContent');
 	POST_sendCampaign = require('./routes/POST_sendCampaign');
 
-var apikey = 'apikey 2e245abbf386e536f681683b92639fc8';
-
 var server = restify.createServer();
 server.use(restify.fullResponse());
 server.use(restify.bodyParser({
@@ -48,11 +46,15 @@ server.use(restify.gzipResponse());
 //     next();
 // });
 
+server.get('/', function (req, res, next) {
+    res.send('mailchimp api is running...');
+});
+
 server.post('/api/3.0/campaign', function (req, res, next) {
 
     console.log("\nvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv\n/api/3.0/campaign");
     
-    POST_campaign.POST_campaign(req, res, next, apikey); // Sends response directly.
+    POST_campaign.POST_campaign(req, res, next, req.params.apikey); // Sends response directly.
 });
 
 
@@ -60,7 +62,7 @@ server.put('/api/3.0/campaign/content', function (req, res, next) {
 
     console.log("\nvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv\n/api/3.0/campaign/content");
     
-    PUT_campaignContent.PUT_campaignContent(req, res, next, apikey); // Sends response directly.
+    PUT_campaignContent.PUT_campaignContent(req, res, next, req.params.apikey); // Sends response directly.
 });
 
 
@@ -68,7 +70,7 @@ server.post('/api/3.0/campaign/actions/send', function (req, res, next) {
 
     console.log("\nvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv\n/api/3.0/campaign/actions/send");
     
-    POST_sendCampaign.POST_sendCampaign(req, res, next, apikey); // Sends response directly.
+    POST_sendCampaign.POST_sendCampaign(req, res, next, req.params.apikey); // Sends response directly.
 });
 
 
@@ -76,7 +78,7 @@ server.post('/api/3.0/templates', function (req, res, next) {
 
     console.log("\nvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv\n/api/3.0/templates");
     
-    POST_templates.POST_templates(req, res, next, apikey); // Sends response directly.
+    POST_templates.POST_templates(req, res, next, req.params.apikey); // Sends response directly.
 });
 
 
